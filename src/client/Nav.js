@@ -4,7 +4,7 @@ function Navigation() {
   return (
     <nav>
       <ul>
-        <li>
+        <li className="nav-logo">
           <a href="#">
             <img
               src="https://docs.google.com/uc?export=download&id=1Ax3M9GU5H5h4Kvog5WbOxNQvbjUKmQj9"
@@ -15,9 +15,15 @@ function Navigation() {
         </li>
         <li>
           <ul className="nav-links">
-            <li>Home</li>
-            <li>About</li>
-            <li>Meals</li>
+            <li>
+              <a href="#">Home</a>
+            </li>
+            <li>
+              <a href="#">About</a>
+            </li>
+            <li>
+              <a href="#">Meals</a>
+            </li>
           </ul>
         </li>
       </ul>

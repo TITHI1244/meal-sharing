@@ -25,21 +25,24 @@ function App() {
   return (
     <div>
       <Navigation />
-      <Header />
-      <Router>
-        <Route exact path="/">
-          <Home meals={meals} />
-        </Route>
-        <Route path="/meals">
-          <Meals meals={meals} />
-        </Route>
-        <Route path="/meal/:id">
-          <Meal meals={meals} />
-        </Route>
-        <Route exact path="/test-component">
-          <TestComponent></TestComponent>
-        </Route>
-      </Router>
+      <div className="app">
+        <Header />
+        <Router>
+          <Route exact path="/">
+            <Home meals={meals} />
+          </Route>
+          <Route path="/meals">
+            <Meals meals={meals} />
+          </Route>
+          <Route path="/meal/:id">
+            <Meal meals={meals} />
+          </Route>
+          <Route exact path="/test-component">
+            <TestComponent></TestComponent>
+          </Route>
+        </Router>
+      </div>
+
       {/* <Footer /> */}
     </div>
   );

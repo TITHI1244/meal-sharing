@@ -16,26 +16,26 @@ router.get("/", async (request, response) => {
 router.post("/", async (request, response) => {
   try {
     console.log(request.body);
-    await knex('review')
-    .insert({ title: request.body.title,
-              description: request.body.description,
-              meal_id: request.body.meal_id,
-              stars: request.body.stars,
-              created_date: request.body.created_date
-  });
-  response.json(request.body);
+    await knex("review").insert({
+      title: request.body.title,
+      description: request.body.description,
+      meal_id: request.body.meal_id,
+      stars: request.body.stars,
+      created_date: request.body.created_date,
+    });
+    response.json(request.body);
   } catch (error) {
     throw error;
   }
 });
- 
+
 // Returns review by id, GET, endpoint: api/reviews/2
 router.get("/:id", async (request, response) => {
   try {
-    console.log(request.params);    
+    console.log(request.params);
     const requestedReview = await knex("review")
-                    .select('title', 'description', 'meal_id', 'stars') 
-                    .where({id : request.params.id});
+      .select("title", "description", "meal_id", "stars")
+      .where({ id: request.params.id });
     response.json(requestedReview);
   } catch (error) {
     throw error;
@@ -48,9 +48,13 @@ router.put("/:id", async (request, response) => {
     console.log(request.body);
     const reviews = await knex("review");
     await knex("review")
-                    .where({id : request.params.id})
-                    .update({description: 'Such a lovely host with awesome food'})
-                    .then(item => response.json(reviews.filter(review => review.id === parseInt(request.params.id))));
+      .where({ id: request.params.id })
+      .update({ description: "Such a lovely host with awesome food" })
+      .then((item) =>
+        response.json(
+          reviews.filter((review) => review.id === parseInt(request.params.id))
+        )
+      );
   } catch (error) {
     throw error;
   }
@@ -60,9 +64,7 @@ router.put("/:id", async (request, response) => {
 router.delete("/:id", async (request, response) => {
   try {
     console.log(request.params);
-    await knex("review")
-                    .where({id : request.params.id})
-                    .del();         
+    await knex("review").where({ id: request.params.id }).del();
     response.send(await knex("review"));
   } catch (error) {
     throw error;

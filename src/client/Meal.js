@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 
 function Meal({ meals }) {
   const [guests, setGuests] = useState(1);
@@ -8,6 +9,7 @@ function Meal({ meals }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [reservation, setReservation] = useState({});
+  const [displayForm, setDisplayForm] = useState(false);
   const params = useParams();
   console.log(params);
   const meal = meals.filter((meal) => meal.id === Number(params.id))[0];
@@ -28,7 +30,9 @@ function Meal({ meals }) {
         console.error("Error:", error);
       });
   }, [reservation]);
-
+  const showForm = () => {
+    setDisplayForm(true);
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     const newReservation = {
@@ -44,56 +48,70 @@ function Meal({ meals }) {
   };
   return (
     <div>
-      <div>
-        <h2>{meal.title}</h2>
-        <h3>---{meal.description}</h3>
-        <h3>Location: {meal.location}</h3>
-        <h3>Maximum reservations: {meal.max_reservations}</h3>
-        <h3>Price: {meal.price}</h3>
+      <div className="meal-detail">
+        <div>
+          <img src={meal.image} />
+        </div>
+        <div>
+          <h2>{meal.title}</h2>
+          <h3>---{meal.description}</h3>
+          <h3>Location: {meal.location}</h3>
+          <h3>Maximum reservations: {meal.max_reservations}</h3>
+          <h3>Price: {meal.price}</h3>
+        </div>
       </div>
-      <div>
-        <p>Today: {date}</p>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="no_of_guests">Number of guests</label>
-            <input
-              type="number"
-              min="1"
-              id="no_of_guests"
-              value={guests}
-              onChange={(e) => setGuests(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="contact">Contact number</label>
-            <input
-              type="text"
-              id="contact"
-              value={contact}
-              onChange={(e) => setContact(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="name">Contact name</label>
-            <input
-              type="text"
-              id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="email">Contact email</label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <button type="submit">Book seat</button>
-        </form>
-      </div>
+      {displayForm ? (
+        <div className="add-meal-form">
+          <p className="center-aligned-text">Today: {date}</p>
+          <form onSubmit={handleSubmit}>
+            <div className="form-flex">
+              <label htmlFor="no_of_guests">Number of guests</label>
+              <input
+                type="number"
+                min="1"
+                id="no_of_guests"
+                value={guests}
+                onChange={(e) => setGuests(e.target.value)}
+              />
+            </div>
+            <div className="form-flex">
+              <label htmlFor="contact">Contact number</label>
+              <input
+                type="text"
+                id="contact"
+                value={contact}
+                onChange={(e) => setContact(e.target.value)}
+              />
+            </div>
+            <div className="form-flex">
+              <label htmlFor="name">Contact name</label>
+              <input
+                type="text"
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+            <div className="form-flex">
+              <label htmlFor="email">Contact email</label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <button type="submit">Book seat</button>
+          </form>
+        </div>
+      ) : (
+        <button onClick={showForm}>Reserve seat</button>
+      )}
+      <Link to="/">
+        <div className="back-btn">
+          <button>Back to homepage</button>{" "}
+        </div>
+      </Link>
     </div>
   );
 }

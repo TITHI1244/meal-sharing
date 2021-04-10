@@ -46,7 +46,8 @@ router.get("/", async (request, response) => {
             "location",
             "when",
             "max_reservations",
-            "price"
+            "price",
+            "image"
           )
           .limit(limit)
           .where(function () {

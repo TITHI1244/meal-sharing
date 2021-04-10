@@ -1,28 +1,29 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 function Navigation() {
   return (
     <nav>
       <ul>
         <li className="nav-logo">
-          <a href="#">
+          <NavLink to="/">
             <img
               src="https://docs.google.com/uc?export=download&id=1Ax3M9GU5H5h4Kvog5WbOxNQvbjUKmQj9"
               alt="logo"
               style={{ height: "2em" }}
             />
-          </a>
+          </NavLink>
         </li>
         <li>
           <ul className="nav-links">
             <li>
-              <a href="#">Home</a>
+              <NavLink to="/">Home</NavLink>
             </li>
             <li>
-              <a href="#">About</a>
+              <NavLink to="/about">About</NavLink>
             </li>
             <li>
-              <a href="#">Meals</a>
+              <NavLink to="/meals">Meals</NavLink>
             </li>
           </ul>
         </li>

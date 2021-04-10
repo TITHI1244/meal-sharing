@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import MealDetails from "./MealDetails";
 
 const Meals = ({ meals }) => {
   const [title, setTitle] = useState("");
@@ -8,83 +9,101 @@ const Meals = ({ meals }) => {
   const [time, setTime] = useState("");
   const [reservations, setReservations] = useState(0);
   const [price, setPrice] = useState(0);
+  const [displayForm, setDisplayForm] = useState(false);
   const date = new Date().toDateString();
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(e);
   };
+  const showForm = () => {
+    setDisplayForm(true);
+  };
   return (
     <div>
-      <div>
-        <p>Today: {date}</p>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="title">Title</label>
-            <input
-              type="text"
-              id="title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="description">Description</label>
-            <input
-              type="text"
-              id="description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="location">Contact name</label>
-            <input
-              type="text"
-              id="location"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="time">When</label>
-            <input
-              type="datetime-local"
-              id="time"
-              value={time}
-              onChange={(e) => setTime(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="max_reservations">Maximum reservations</label>
-            <input
-              type="number"
-              id="max_reservations"
-              value={reservations}
-              onChange={(e) => setReservations(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="price">When</label>
-            <input
-              type="number"
-              id="price"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-            />
-          </div>
-          <button type="submit">Save data</button>
-        </form>
-      </div>
-      <ul>
+      <ul className="meal-cards">
         {meals.map((meal) => (
           <li key={meal.id}>
-            <Link to={`/meal/${meal.id}`}>
-              <h4>{meal.title}</h4>
-            </Link>
-            <p>--{meal.description}.</p>
+            <MealDetails
+              id={meal.id}
+              title={meal.title}
+              description={meal.description}
+              location={meal.location}
+              max_reservations={meal.max_reservations}
+              price={meal.price}
+              imageSrc={meal.image}
+            />
           </li>
         ))}
       </ul>
+      {displayForm ? (
+        <div className="add-meal-form">
+          <p className="center-aligned-text">Today: {date}</p>
+          <form onSubmit={handleSubmit}>
+            <div className="form-flex">
+              <label htmlFor="title">Title</label>
+              <input
+                type="text"
+                id="title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+            </div>
+            <div className="form-flex">
+              <label htmlFor="description">Description</label>
+              <input
+                type="text"
+                id="description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+            </div>
+            <div className="form-flex">
+              <label htmlFor="location">Contact name</label>
+              <input
+                type="text"
+                id="location"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+              />
+            </div>
+            <div className="form-flex">
+              <label htmlFor="time">When</label>
+              <input
+                type="datetime-local"
+                id="time"
+                value={time}
+                onChange={(e) => setTime(e.target.value)}
+              />
+            </div>
+            <div className="form-flex">
+              <label htmlFor="max_reservations">Max. reservations</label>
+              <input
+                type="number"
+                id="max_reservations"
+                value={reservations}
+                onChange={(e) => setReservations(e.target.value)}
+              />
+            </div>
+            <div className="form-flex">
+              <label htmlFor="price">When</label>
+              <input
+                type="number"
+                id="price"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+              />
+            </div>
+            <button type="submit">Add a new meal</button>
+          </form>
+        </div>
+      ) : (
+        <button onClick={showForm}>Become a host</button>
+      )}
+      <Link to="/">
+        <div className="back-btn">
+          <button>Back to homepage</button>{" "}
+        </div>
+      </Link>
     </div>
   );
 };

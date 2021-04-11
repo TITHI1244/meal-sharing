@@ -12,7 +12,7 @@ import ReviewSlide from "./ReviewSlide";
 function App() {
   const [meals, setMeals] = useState([]);
   const getAllMeals = () => {
-    fetch("/api/meals")
+    fetch(`http://${process.env.DB_HOST}:${process.env.API_PORT}/api/meals`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -25,7 +25,7 @@ function App() {
   }, []);
   const [reviews, setReviews] = useState([]);
   const getAllReviews = () => {
-    fetch("/api/reviews")
+    fetch(`http://${process.env.DB_HOST}:${process.env.API_PORT}/api/reviews`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);

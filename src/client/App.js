@@ -12,7 +12,7 @@ import ReviewSlide from "./ReviewSlide";
 function App() {
   const [meals, setMeals] = useState([]);
   const getAllMeals = () => {
-    fetch(`http://eu-cdbr-west-01.cleardb.com:5000/api/meals`)
+    fetch(`https://eu-cdbr-west-01.cleardb.com:5000/api/meals`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -25,7 +25,7 @@ function App() {
   }, []);
   const [reviews, setReviews] = useState([]);
   const getAllReviews = () => {
-    fetch(`http://eu-cdbr-west-01.cleardb.com:5000/api/reviews`)
+    fetch(`https://eu-cdbr-west-01.cleardb.com:5000/api/reviews`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);

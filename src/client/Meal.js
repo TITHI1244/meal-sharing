@@ -101,7 +101,9 @@ function Meal({ meals }) {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-            <button type="submit">Book seat</button>
+            <div className="meal-form-btn">
+              <button type="submit">Book seat</button>
+            </div>
           </form>
         </div>
       ) : (

@@ -10,6 +10,7 @@ import Navigation from "./Nav";
 import ReviewSlide from "./ReviewSlide";
 
 function App() {
+  console.log("Inside app");
   const [meals, setMeals] = useState([]);
   const getAllMeals = () => {
     fetch(`/api/meals`)

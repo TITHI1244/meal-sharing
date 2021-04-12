@@ -3,10 +3,10 @@ const router = express.Router();
 const knex = require("../database");
 
 router.get("/", async (request, response) => {
+  console.log("Inside backend");
   try {
     const meals = await knex("meal");
     console.log(request.query);
-
     if (
       (isNaN(parseInt(request.query.maxPrice)) &&
         request.query.maxPrice !== undefined) ||
@@ -38,28 +38,29 @@ router.get("/", async (request, response) => {
           ? parseInt(request.query.limit)
           : meals.length;
       try {
-        const selectedMeals = await knex("meal")
-          .select(
-            "id",
-            "title",
-            "description",
-            "location",
-            "when",
-            "max_reservations",
-            "price",
-            "image"
-          )
-          .limit(limit)
-          .where(function () {
-            this.where("price", "<", maxPrice);
-          })
-          .andWhere(function () {
-            this.where("title", "like", `%${title}%`);
-          })
-          .andWhere(function () {
-            this.where("created_date", ">", createdAfter);
-          });
-        response.json(selectedMeals);
+        const mealsOnly = await knex("meal");
+        // const selectedMeals = await knex("meal")
+        //   .select(
+        //     "id",
+        //     "title",
+        //     "description",
+        //     "location",
+        //     "when",
+        //     "max_reservations",
+        //     "price",
+        //     "image"
+        //   )
+        //   .limit(limit)
+        //   .where(function () {
+        //     this.where("price", "<", maxPrice);
+        //   })
+        //   .andWhere(function () {
+        //     this.where("title", "like", `%${title}%`);
+        //   })
+        //   .andWhere(function () {
+        //     this.where("created_date", ">", createdAfter);
+        //   });
+        response.json(mealsOnly);
       } catch (error) {
         throw error;
       }

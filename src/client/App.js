@@ -13,7 +13,7 @@ function App() {
   console.log("Inside app");
   const [meals, setMeals] = useState([]);
   const getAllMeals = () => {
-    fetch(`/api/meals`)
+    fetch("/api/meals")
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -26,7 +26,7 @@ function App() {
   }, []);
   const [reviews, setReviews] = useState([]);
   const getAllReviews = () => {
-    fetch(`/api/reviews`)
+    fetch("/api/reviews")
       .then((response) => response.json())
       .then((data) => {
         console.log(data);

@@ -97,7 +97,9 @@ const Meals = ({ meals }) => {
           </form>
         </div>
       ) : (
-        <button onClick={showForm}>Become a host</button>
+        <div className="meals-btn">
+          <button onClick={showForm}>Become a host</button>
+        </div>
       )}
       <Link to="/">
         <div className="back-btn">

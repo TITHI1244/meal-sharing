@@ -105,7 +105,9 @@ function Meal({ meals }) {
           </form>
         </div>
       ) : (
-        <button onClick={showForm}>Reserve seat</button>
+        <div className="meal-btn">
+          <button onClick={showForm}>Reserve seat</button>
+        </div>
       )}
       <Link to="/">
         <div className="back-btn">

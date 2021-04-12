@@ -138,7 +138,8 @@ hr {
 }
 .back-btn button,
 .meals-btn button,
-.meal-btn button {
+.meal-btn button,
+.meal-form-btn button {
   padding: 1%;
 }
 .add-meal-form {

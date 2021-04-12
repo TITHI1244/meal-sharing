@@ -15,6 +15,9 @@ function Navigation() {
           </NavLink>
         </li>
         <li>
+          <h1 className="app-name">Share 2 Care</h1>
+        </li>
+        <li>
           <ul className="nav-links">
             <li>
               <NavLink to="/">Home</NavLink>
